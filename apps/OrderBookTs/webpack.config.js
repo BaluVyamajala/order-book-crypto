@@ -20,6 +20,7 @@ const babelLoaderConfiguration = {
     path.resolve(__dirname, 'src'),
     path.resolve(__dirname, 'components'),
     path.resolve(__dirname, 'services'),
+    path.resolve(__dirname, 'node_modules/react-native-vector-icons/'),
     ...compileNodeModules,
   ],
   use: {

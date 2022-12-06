@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, Button, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  FlatList,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import {NavigationProp} from '@react-navigation/native';
 import {getSymbols} from '../../services/BinanceService';
 interface HomeProps {
@@ -16,13 +23,19 @@ const Home = (props: HomeProps) => {
   }, []);
 
   const onPressTab = () => props.navigation.navigate('Tab');
+  const onPressSymbol = (item: string) =>
+    props.navigation.navigate('OrdersPage', item);
   return (
     <>
       <Button title="Go to Tab" onPress={onPressTab} />
       <View style={styles.container}>
         <FlatList
           data={symbols}
-          renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
+          renderItem={({item}) => (
+            <TouchableWithoutFeedback onPress={() => onPressSymbol(item)}>
+              <Text style={styles.item}>{item}</Text>
+            </TouchableWithoutFeedback>
+          )}
         />
       </View>
     </>
